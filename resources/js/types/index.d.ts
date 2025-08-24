@@ -18,7 +18,7 @@ export interface NavGroup {
 export interface NavItem {
     title: string;
     href: string;
-    role?: string[]
+    role?: string[];
     icon?: LucideIcon | null;
     isActive?: boolean;
 }
@@ -27,6 +27,7 @@ export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    role: string
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
     [key: string]: unknown;
@@ -43,6 +44,13 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-const ADMIN = "admin"
-const DOSEN = "dosen"
-const MAHASISWA = "mahasiswa"
+export interface Mahasiswa {
+    id: number;
+    jurusan: string;
+    nama: string;
+    nim: string
+}
+
+const ADMIN = 'admin';
+const DOSEN = 'dosen';
+const MAHASISWA = 'mahasiswa';

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -38,13 +39,14 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
-
+        // dd($request->user());
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
+            'role' => Auth::guard("mhs")->user() ? 'mahasiswa' : (Auth::guard("user")->user()?->is_admin ? 'admin' : 'dosen'),
             'auth' => [
-                'user' => $request->user(),
+                'user' => Auth::guard("mhs")->user() ?? Auth::guard("user")->user(),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

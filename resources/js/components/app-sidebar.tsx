@@ -12,7 +12,7 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
-        role: ["all"]
+        role: ["mahasiswa", "admin", "dosen"]
     },
     {
         title: 'Mahasiswa',

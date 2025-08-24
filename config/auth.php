@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
+        'guard' => env('AUTH_GUARD', 'mhs'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
@@ -36,13 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'mhs' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'web',
         ],
-        'admin' => [
+        'user' => [
             'driver' => 'session',
-            'provider' => 'admin'
+            'provider' => 'users'
         ]
     ],
 
@@ -64,13 +64,13 @@ return [
     */
 
     'providers' => [
+        'web' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Usermhs::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Usermhs::class),
-        ],
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => App\Models\User::class,
         ]
 
         // 'users' => [
